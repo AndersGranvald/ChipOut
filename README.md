@@ -1,2 +1,2 @@
 # ChipOut
-Gambling self exclusion service
+Self exclusion service
