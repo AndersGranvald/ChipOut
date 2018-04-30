@@ -1,0 +1,27 @@
+# 
+# docker compose file that starts up all components needed for the self exclusion service of NIX
+# 
+version: '3'
+
+services:
+
+  # the redis datastore is used to store all exclusions / transactions 
+  redis:
+    image: "redis"
+    ports:
+      - "6379"
+    networks:
+      - frontend
+    command: "redis-server --appendonly yes"
+  
+  apiserver:
+    image: "apiserver"
+    ports:
+      - "5000:3000"
+    networks:
+      - frontend
+    depends_on:
+      - redis
+
+networks:
+  frontend:
